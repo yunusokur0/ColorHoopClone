@@ -12,22 +12,22 @@ public class Stand : MonoBehaviour
 
     public GameObject EnUstekiCemberiVer()
     {
-        return Cemberler[^1]; // cemberlerin en sonuncu elamanını dönder
+        return Cemberler[^1]; // cemberlerin en sonuncu elamanÄ±nÄ± dÃ¶nder
     }
 
     public GameObject MusaitSoketiVer()
     {
-        return Soketler[BosOlanSoket]; // cemberlerin en sonuncu elamanını dönder
+        return Soketler[BosOlanSoket]; // cemberlerin en sonuncu elamanÄ±nÄ± dÃ¶nder
     }
-    public void SoketDegistirmeİslemleri(GameObject silinecekObje)
+    public void SoketDegistirmeÄ°slemleri(GameObject silinecekObje)
     {
-        Cemberler.Remove(silinecekObje);  // silinecek obje gameManagerde seçilenobjedir
+        Cemberler.Remove(silinecekObje);  
 
-        //Cemberler listesinin eleman sayısı 0'dan farklıysa (yani listede en az bir eleman varsa)
+        //Cemberler listesinin eleman sayÄ±sÄ± 0'dan farklÄ±ysa (yani listede en az bir eleman varsa)
         if (Cemberler.Count != 0)
         {
             BosOlanSoket--;
-            //Cemberler listesinin son elemanının Cember component'ına erişilerek HareketEdebilirmi özelliği true olarak degistir
+            //Cemberler listesinin son elemanÄ±nÄ±n Cember component'Ä±na eriÅŸilerek HareketEdebilirmi Ã¶zelliÄŸi true olarak degistir
             Cemberler[^1].GetComponent<Cember>().HareketEdebilirmi = true;
         }
 
@@ -38,48 +38,48 @@ public class Stand : MonoBehaviour
     }
     public void CemberleriKontrolEt()
     {
-        //listesi 4 elemana sahipse (yani her bir tribünde bir daire varsa)
+        //listesi 4 elemana sahipse (yani her bir tribÃ¼nde bir daire varsa)
         if (Cemberler.Count == 4)
         {
-            //listesinin ilk elemanından rengi alınır
+            //listesinin ilk elemanÄ±ndan rengi alÄ±nÄ±r
             string renk = Cemberler[0].GetComponent<Cember>().color;
-            //Cemberler listesindeki her bir eleman için aşağıdaki adımlar tekrarlanır
+            //Cemberler listesindeki her bir eleman iÃ§in aÅŸaÄŸÄ±daki adÄ±mlar tekrarlanÄ±r
             foreach (var item in Cemberler)
             {
-                //Eğer elemanın rengi, ilk elemanın rengine esitse
+                //EÄŸer elemanÄ±n rengi, ilk elemanÄ±n rengine esitse
                 if (renk == item.GetComponent<Cember>().color)
-                    // Tamamlanan çember sayısı bir artırılır
+                    // Tamamlanan Ã§ember sayÄ±sÄ± bir artÄ±rÄ±lÄ±r
                     CemberTamamlamaSayisi++;
             }
-            //ğer tamamlanan çember sayısı 4 ise (yani tüm çemberler aynı renkte ise)
+            //ÄŸer tamamlanan Ã§ember sayÄ±sÄ± 4 ise (yani tÃ¼m Ã§emberler aynÄ± renkte ise)
             if (CemberTamamlamaSayisi == 4)
             {
-                //GameManager sınıfındaki StandTamamlandi() fonksiyonu cagirir bu fonksiyon oyunun devam etmesi veya bittigini kontrol eder
+                //GameManager sÄ±nÄ±fÄ±ndaki StandTamamlandi() fonksiyonu cagirir bu fonksiyon oyunun devam etmesi veya bittigini kontrol eder
                 gameManager.StandTamamlandi();
-                //tamamlanmisStand() fonksiyonu çağrılır Bu fonksiyon, tamamlanan tribünün rengini kapatır ve tribünün üzerindeki tüm daireleri hareketsiz hale getirir
+                //tamamlanmisStand() fonksiyonu Ã§aÄŸrÄ±lÄ±r Bu fonksiyon, tamamlanan tribÃ¼nÃ¼n rengini kapatÄ±r ve tribÃ¼nÃ¼n Ã¼zerindeki tÃ¼m daireleri hareketsiz hale getirir
                 tamamlanmisStand();
             }
-            //  Eğer tüm çemberler aynı renkte değilse
+            //  EÄŸer tÃ¼m Ã§emberler aynÄ± renkte deÄŸilse
             else
             {
-                CemberTamamlamaSayisi = 0; // Tamamlanan çember sayısı sıfırlanır
+                CemberTamamlamaSayisi = 0; // Tamamlanan Ã§ember sayÄ±sÄ± sÄ±fÄ±rlanÄ±r
             }
         }
     }
     public void tamamlanmisStand()
     {
-        // _Cemberler listesi içindeki her bir Cember objesi için aşağıdaki işlemleri yapar
+        // _Cemberler listesi iÃ§indeki her bir Cember objesi iÃ§in aÅŸaÄŸÄ±daki iÅŸlemleri yapar
         foreach (var item in Cemberler)
         {
-            //Cember'in HareketEdebilirmi değişkenini false yapar Bu oyuncunun Cemberi taşımak veya hareket ettirmek için artık kullanamayacağı anlamına gelir
+            //Cember'in HareketEdebilirmi deÄŸiÅŸkenini false yapar Bu oyuncunun Cemberi taÅŸÄ±mak veya hareket ettirmek iÃ§in artÄ±k kullanamayacaÄŸÄ± anlamÄ±na gelir
             item.GetComponent<Cember>().HareketEdebilirmi = false;
-            //Cember'in mevcut rengini alır
+            //Cember'in mevcut rengini alÄ±r
             Color32 color = item.GetComponent<MeshRenderer>().material.GetColor("_Color");
-            //Alınan rengin alph degerini 100 olarak ayarlar. Bu, Cember'in rengini biraz daha matlaştırı
+            //AlÄ±nan rengin alph degerini 100 olarak ayarlar. Bu, Cember'in rengini biraz daha matlaÅŸtÄ±rÄ±
             color.a = 100;
-            //Cember'in materyal rengini, değiştirilmis renk ile günceller
+            //Cember'in materyal rengini, deÄŸiÅŸtirilmis renk ile gÃ¼nceller
             item.GetComponent<MeshRenderer>().material.SetColor("_Color", color);
-            //Standın tag değerini tamamlanmis olarak değiştirir Bu diğer nesnelerin Standı tamamlanmis olarak algılamasına yardımci olur
+            //StandÄ±n tag deÄŸerini tamamlanmis olarak deÄŸiÅŸtirir Bu diÄŸer nesnelerin StandÄ± tamamlanmis olarak algÄ±lamasÄ±na yardÄ±mci olur
             gameObject.tag = "tamamlanmis";
         }
     }
