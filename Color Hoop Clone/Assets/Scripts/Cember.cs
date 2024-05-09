@@ -37,7 +37,6 @@ public class Cember : MonoBehaviour
     {
         if (Secildi)
         {
-            //objenin mevcut pozisyonunu, hedef pozisyona yavaþça yaklaþtýrarak geçiþ hareketi yapar ve objenin hareket etmesini saðlar
             transform.position = Vector3.Lerp(transform.position, HareketPozisyonu.transform.position, .1f);
             if (Vector3.Distance(transform.position, HareketPozisyonu.transform.position) < .10)
             {
@@ -47,7 +46,6 @@ public class Cember : MonoBehaviour
 
         if (Posdegistir)
         {
-            //tikladigim standa gider
             transform.position = Vector3.Lerp(transform.position, HareketPozisyonu.transform.position, .1f);
             if (Vector3.Distance(transform.position, HareketPozisyonu.transform.position) < .10)
             {
