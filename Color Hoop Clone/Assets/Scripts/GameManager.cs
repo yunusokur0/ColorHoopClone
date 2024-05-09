@@ -7,31 +7,24 @@ public class GameManager : MonoBehaviour
     Cember Cember;
     public bool HareketVar;
     public int hedefStandSayisi;
-    public int TamamlananStandSayısı;
+    public int TamamlananStandSayÃ½sÃ½;
     void Update()
     {
-        // sol kilik
         if (Input.GetMouseButtonDown(0))
         {
-            //cameradan tikladigin yere isin gönderilir , carpisma bilgilerini saglar , isinin uzunlugu
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 200))
             {
-                // fare tıklaması ile sahnede bir nesneye çarpılıp çarpılmadığını kontrol eder ve eğer çarpışılan nesne "Stand" etiketine sahipse kosulu sağlar
                 if (hit.collider != null && hit.collider.CompareTag("Stand"))
                 {
-                    // SeciliObje bos değil ise ve  seçili stand isinin temas ettigi stand olmadigini kontrol eder
                     if (SeciliObje != null && SeciliSdand != hit.collider.gameObject)
                     {
-                        //isinin gitigi objedeki stand scriptinin bir örneğini _Stand degiskenine atar
                         Stand _Stand = hit.collider.GetComponent<Stand>();
-                        //stand scriptindeki listenin eleman sayisi 4 veya 0 değil ise
+
                         if (_Stand.Cemberler.Count != 4 && _Stand.Cemberler.Count != 0)
                         {
-                            //ışının isabet ettiği daire == sahnede bulunan tüm dairelerin listesindeki son elemanın rengi
                             if (Cember.color == _Stand.Cemberler[^1].GetComponent<Cember>().color)
                             {
-                                //SeciliObje listeden silinir
-                                SeciliSdand.GetComponent<Stand>().SoketDegistirmeİslemleri(SeciliObje);
+                                SeciliSdand.GetComponent<Stand>().SoketDegistirmeÃslemleri(SeciliObje);
                                 Cember.HareketEt("pozisyonDegistir", hit.collider.gameObject, _Stand.MusaitSoketiVer(), _Stand.HareketPozisyonu);
 
                                 _Stand.BosOlanSoket++;
@@ -49,10 +42,9 @@ public class GameManager : MonoBehaviour
 
 
                         }
-                        //liste  eleman sayisinin sifir ise
                         else if (_Stand.Cemberler.Count == 0)
                         {
-                            SeciliSdand.GetComponent<Stand>().SoketDegistirmeİslemleri(SeciliObje);
+                            SeciliSdand.GetComponent<Stand>().SoketDegistirmeÃslemleri(SeciliObje);
                             Cember.HareketEt("pozisyonDegistir", hit.collider.gameObject, _Stand.MusaitSoketiVer(), _Stand.HareketPozisyonu);
 
                             _Stand.BosOlanSoket++;
@@ -69,7 +61,7 @@ public class GameManager : MonoBehaviour
                         }
                     }
 
-                    //seçilen stand isinin gittigi standa esit ise
+
                     else if (SeciliSdand == hit.collider.gameObject)
                     {
                         Cember.HareketEt("soketeGeriGit");
@@ -78,17 +70,16 @@ public class GameManager : MonoBehaviour
                     }
                     else
                     {
-                        //isinin gitigi objedeki stand scriptinin bir örneğini _Stand degiskenine atar
+            
                         Stand _Stand = hit.collider.GetComponent<Stand>();
-                        //SeciliObje = cemberlerin en sonuncu elamanını
+      
                         SeciliObje = _Stand.EnUstekiCemberiVer();
-                        // SeciliObjenin Cember scriptini _Cember değişkenine atar
+  
                         Cember = SeciliObje.GetComponent<Cember>();
                         HareketVar = true;
 
                         if (Cember.HareketEdebilirmi)
                         {
-                            //                                   ,  çemberin hareket edeceği hedef konumu belirler
                             Cember.HareketEt("secim", null, null, Cember.AitOlduguStand.GetComponent<Stand>().HareketPozisyonu);
                             SeciliSdand = Cember.AitOlduguStand;
                         }
@@ -100,8 +91,8 @@ public class GameManager : MonoBehaviour
 
     public void StandTamamlandi()
     {
-        TamamlananStandSayısı+=1;
-        if (TamamlananStandSayısı == hedefStandSayisi)
+        TamamlananStandSayÃ½sÃ½+=1;
+        if (TamamlananStandSayÃ½sÃ½ == hedefStandSayisi)
             Debug.Log("okey");
     }
 }
